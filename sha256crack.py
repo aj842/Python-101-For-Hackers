@@ -1,5 +1,7 @@
+#Project1
 from pwn import *
 import sys
+#Test if length of the string is less than 2 then it is not a valid argument
 if len(sys.argv) != 2:
 	print("Invalid arguments!")
 	print(">> {} <sha256sum>".format(sys.argv[0]))
@@ -11,10 +13,13 @@ attempts = 0
 
 with log.progress("Attempting to back: {}!\n".format(wanted_hash)) as p:
 	with open(password_file, "r", encoding='latin-1') as password_list:
+		#Comparing the given hash against the hash for every password in the password file
 		for password in password_list:
 			password = password.strip("\n").encode('latin-1')
+			#Calculating Hash
 			password_hash = sha256sumhex(password)
 			p.status("[{}] {} == {}".format(attempts, password.decode('latin-1'), password_hash))
+			#Comparing given hash with the calculated hash
 			if password_hash == wanted_hash:
 				p.success("Password hash found after {} attempts! {} hashes to {}".format(attempts, password.decode('latin-1'), password_hash))
 				exit()
