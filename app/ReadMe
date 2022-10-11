@@ -1,0 +1,3 @@
+This is a simple app created using Python Flask for the purpose of testing
+To install flask: pip install flask
+Execute Flask: flask run
